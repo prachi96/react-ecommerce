@@ -1,11 +1,11 @@
 import React from "react";
-import { sections } from "../../../data/MenuItemData";
+import { MENU_SECTIONS } from "../../../data/MenuItems";
 import MenuItem from "../../molecules/MenuItem";
 import "./Directory.scss";
 
 class Directory extends React.Component {
   state = {
-    sections
+    sections: MENU_SECTIONS
   };
 
   render() {
