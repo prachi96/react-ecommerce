@@ -1,7 +1,7 @@
 import React from "react";
 import CustomInput from "../../atoms/CustomInput";
 import CustomButton from "../../atoms/CustomButton";
-import { signInWithGoogle } from "../../../firebase/firebase.utils";
+import { signInWithGoogle, auth } from "../../../firebase/firebase.utils";
 import "./SignIn.scss";
 
 class SignIn extends React.Component {
@@ -10,9 +10,16 @@ class SignIn extends React.Component {
     password: "",
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    this.setState({ email: "", password: "" });
+    const { email, password } = this.state;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: "", password: "" });
+    } catch (error) {
+      console.log("Error signing in: ", error.message);
+    }
   };
 
   handleChange = (event) => {
