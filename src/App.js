@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -42,16 +42,17 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
-          <Route path="/signin" component={SignInSignUp} />
+          <Route
+            path="/signin"
+            render={() =>
+              this.props.currentUser ? <Redirect to="/" /> : <SignInSignUp />
+            }
+          />
         </Switch>
       </div>
     );
   }
 }
-
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: bindActionCreators(setCurrentUser, dispatch),
-});
 
 /**
  * In case of Switch, if it gets a first match,
@@ -59,4 +60,12 @@ const mapDispatchToProps = (dispatch) => ({
  * So we don't accidently render multiple components.
  */
 
-export default connect(null, mapDispatchToProps)(App);
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: bindActionCreators(setCurrentUser, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
