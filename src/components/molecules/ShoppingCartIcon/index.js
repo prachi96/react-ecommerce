@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { ReactComponent as CartIcon } from "../../../assets/cart-icon.svg";
 import "./ShoppingCartIcon.scss";
-import { toggleCartDropdown } from "../../../global/redux/cart/cart.actions";
+import { toggleCartDropdown } from "../../../redux/cart/cart.actions";
 
 const ShoppingCartIcon = ({ toggleCartDropdown }) => (
   <div className="shopping-cart-icon" onClick={toggleCartDropdown}>
