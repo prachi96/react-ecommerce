@@ -4,6 +4,7 @@
  flex-direction: column;
  height: 350px;
  align-items: center;
+ position: relative;
 
  &__image {
   width: 100%;
@@ -11,6 +12,25 @@
   background-size: cover;
   background-position: center;
   margin-bottom: 5px;
+
+  &:hover {
+   opacity: 0.8;
+  }
+ }
+
+ .custom-button {
+  width: 80%;
+  opacity: 0.7;
+  position: absolute;
+  top: 255px;
+  display: none;
+ }
+
+ &:hover {
+  .custom-button {
+   opacity: 0.85;
+   display: flex;
+  }
  }
 
  &__footer {
@@ -19,14 +39,14 @@
   display: flex;
   justify-content: space-between;
   font-size: 18px;
- }
 
- &__name {
-  width: 90%;
-  margin-bottom: 15px;
- }
+  &__name {
+   width: 90%;
+   margin-bottom: 15px;
+  }
 
- &__price {
-  width: 10%;
+  &__price {
+   width: 10%;
+  }
  }
 }
