@@ -1,4 +1,9 @@
-import { TOGGLE_CART_DROPDOWN, ADD_CART_ITEM } from "./cart.constants";
+import {
+  TOGGLE_CART_DROPDOWN,
+  ADD_CART_ITEM,
+  REMOVE_CART_ITEM,
+  CLEAR_CART_ITEM,
+} from "./cart.constants";
 
 export const toggleCartDropdown = () => ({
   type: TOGGLE_CART_DROPDOWN,
@@ -6,6 +11,16 @@ export const toggleCartDropdown = () => ({
 
 export const addItem = (item) => ({
   type: ADD_CART_ITEM,
+  data: item,
+});
+
+export const removeItem = (item) => ({
+  type: REMOVE_CART_ITEM,
+  data: item,
+});
+
+export const clearItem = (item) => ({
+  type: CLEAR_CART_ITEM,
   data: item,
 });
 

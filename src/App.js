@@ -2,14 +2,17 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
-import "./App.css";
+import { createStructuredSelector } from "reselect";
 import HomePage from "./components/templates/HomePage";
 import ShopPage from "./components/templates/ShopPage";
+import CheckoutPage from "./components/templates/CheckoutPage";
 import Header from "./components/molecules/Header";
 import SignInSignUp from "./components/templates/SignInSignUp";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
+import { selectCurrentUser } from "./redux/user/user.selectors";
+
+import "./App.css";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -42,6 +45,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route
             path="/signin"
             render={() =>
@@ -60,8 +64,8 @@ class App extends React.Component {
  * So we don't accidently render multiple components.
  */
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
