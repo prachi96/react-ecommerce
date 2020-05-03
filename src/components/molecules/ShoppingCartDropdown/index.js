@@ -12,7 +12,7 @@ const ShoppingCartDropdown = ({ cartItems, history, toggleCartDropdown }) => (
   <div className="shopping-cart-dropdown">
     <div className="cart-items">
       {cartItems.length ? (
-        cartItems.map((item) => <ShoppingCartItem ke y={item.id} item={item} />)
+        cartItems.map((item) => <ShoppingCartItem key={item.id} item={item} />)
       ) : (
         <span className="cart-item__info">Your cart is empty</span>
       )}

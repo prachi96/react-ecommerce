@@ -1,10 +1,13 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import CollectionItem from "../CollectionItem";
 import "./CollectionPreview.scss";
 
-const CollectionPreview = ({ title, items }) => (
+const CollectionPreview = ({ title, items, routeName, match, history }) => (
   <div className="collection-preview">
-    <h1 className="collection-preview__title">{title.toUpperCase()}</h1>
+    <div onClick={() => history.push(`${match.path}/${routeName}`)}>
+      <h1 className="collection-preview__title">{title.toUpperCase()}</h1>
+    </div>
     <div className="collection-preview__items">
       {items &&
         items
@@ -14,4 +17,4 @@ const CollectionPreview = ({ title, items }) => (
   </div>
 );
 
-export default CollectionPreview;
+export default withRouter(CollectionPreview);

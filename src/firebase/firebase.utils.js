@@ -32,8 +32,33 @@ export const createUserProfileDocument = async (userAuth, additonalData) => {
       console.log("error creating a user : ", error.message);
     }
   }
-  console.log(snapshot);
   return userReference;
+};
+
+export const addCollectionAndItems = async (collectionKey, itemsToAdd) => {
+  const collectionRef = firestore.collection(collectionKey);
+  const batch = firestore.batch();
+  itemsToAdd.forEach((item) => {
+    const docReference = collectionRef.doc();
+    batch.set(docReference, item);
+  });
+  return await batch.commit();
+};
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollections = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+    return {
+      title,
+      items,
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+    };
+  });
+  return transformedCollections.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
 };
 
 firebase.initializeApp(config);

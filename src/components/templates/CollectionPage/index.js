@@ -5,6 +5,9 @@ import CollectionItem from "../../molecules/CollectionItem";
 import "./CollectionPage.scss";
 
 const CollectionPage = ({ collectionDetails }) => {
+  if (!collectionDetails) {
+    return null;
+  }
   const { title, items } = collectionDetails;
   return (
     <div className="collection-page">
