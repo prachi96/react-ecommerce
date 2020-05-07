@@ -3,6 +3,7 @@ import {
   ADD_CART_ITEM,
   REMOVE_CART_ITEM,
   CLEAR_CART_ITEM,
+  CLEAR_CART,
 } from "./cart.constants";
 
 export const toggleCartDropdown = () => ({
@@ -22,6 +23,10 @@ export const removeItem = (item) => ({
 export const clearItem = (item) => ({
   type: CLEAR_CART_ITEM,
   data: item,
+});
+
+export const clearCart = () => ({
+  type: CLEAR_CART,
 });
 
 export default {};

@@ -3,14 +3,14 @@ import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import CollectionPageContainer from "../CollectionPage/CollectionPage.container";
 import CollectionOverviewContainer from "../../molecules/CollectionOverview/CollectionOverview.container";
-import { fetchCollections } from "../../../redux/shop/shop.actions";
+import { fetchCollectionsStart } from "../../../redux/shop/shop.actions";
 import "./ShopPage.scss";
 import { bindActionCreators } from "redux";
 
 class ShopPage extends React.Component {
   componentDidMount() {
-    const { fetchCollections } = this.props;
-    fetchCollections();
+    const { fetchCollectionsStart } = this.props;
+    fetchCollectionsStart();
   }
 
   render() {
@@ -32,14 +32,14 @@ class ShopPage extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCollections: bindActionCreators(fetchCollections, dispatch),
+  fetchCollectionsStart: bindActionCreators(fetchCollectionsStart, dispatch),
 });
 
 export default connect(null, mapDispatchToProps)(ShopPage);
 
 // fetch(
 //   "https://firestore.googleapis.com/v1/projects/react-ecommerce-db-e7436/databases/(default)/documents/collections"
-// ).then((response) => response.toJSON());
+// ).then((response) => response.json());
 
 /* Using observable pattern */
 // collectionRef.onSnapshot((snapshot) => {
